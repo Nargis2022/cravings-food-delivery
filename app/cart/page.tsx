@@ -1,0 +1,11 @@
+'use client';
+
+import Link from 'next/link';
+import { ArrowLeft, ShoppingBag } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import CartItem from '@/components/CartItem';
+import OrderSummary from '@/components/OrderSummary';
+import { useCart } from '@/components/CartContext';
+
+export default function CartPage() { const { items } = useCart(); const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0); return <div className="min-h-screen bg-[#fffaf5] text-[#292724]"><Header /><main className="mx-auto max-w-7xl px-5 pb-20 pt-14 lg:px-8 lg:pt-20"><Link href="/" className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-[#827870] transition hover:text-[#f4512a]"><ArrowLeft size={16} /> Back to menu</Link><div className="mb-10"><p className="text-xs font-extrabold uppercase tracking-[.2em] text-[#f4512a]">Review & enjoy</p><h1 className="mt-2 text-5xl font-extrabold tracking-[-0.06em]">Your cart</h1><p className="mt-3 text-lg text-[#827870]">A little something delicious is on its way.</p></div>{items.length === 0 ? <div className="rounded-[28px] border border-dashed border-[#e5d4ca] bg-white px-6 py-20 text-center"><span className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-[#fff0e8] text-[#f4512a]"><ShoppingBag size={29} /></span><h2 className="mt-6 text-2xl font-extrabold">Nothing here yet</h2><p className="mx-auto mt-2 max-w-sm text-[#827870]">Your cart is waiting for something wonderful. Start with one of our neighborhood favorites.</p><Link href="/#popular" className="mt-7 inline-flex rounded-full bg-[#f4512a] px-6 py-3 text-sm font-extrabold text-white transition hover:bg-[#df421f]">Browse food</Link></div> : <div className="grid items-start gap-8 lg:grid-cols-[1.35fr_.8fr]"><div><div className="mb-4 flex items-center justify-between"><h2 className="text-lg font-extrabold">Selected meals <span className="ml-1 text-[#a1958c]">({items.length})</span></h2><span className="rounded-full bg-[#e8f8e6] px-3 py-1 text-xs font-bold text-[#2e8644]">Open until 10pm</span></div><div className="space-y-4">{items.map((item) => <CartItem key={item.id} item={item} />)}</div></div><OrderSummary subtotal={subtotal} /></div>}</main><Footer /></div>; }

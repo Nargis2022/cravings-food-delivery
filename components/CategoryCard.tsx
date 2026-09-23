@@ -1,0 +1,5 @@
+import { Beef, CakeSlice, CupSoda, Leaf, Soup, Utensils } from 'lucide-react';
+
+const iconMap = { Burgers: Beef, Pasta: Soup, Asian: Utensils, Healthy: Leaf, Desserts: CakeSlice, Drinks: CupSoda };
+const styles = ['bg-[#fff0e8] text-[#e75932]', 'bg-[#fff5de] text-[#b77b12]', 'bg-[#e4f7e8] text-[#2d8a4b]', 'bg-[#e7f0ff] text-[#426cb4]', 'bg-[#ffe8df] text-[#e35b3e]', 'bg-[#fff0ca] text-[#b77b12]'];
+export default function CategoryCard({ name, index }: { name: keyof typeof iconMap; index: number }) { const Icon = iconMap[name]; return <button className="group flex min-w-[120px] flex-1 flex-col items-center gap-3 rounded-2xl border border-transparent bg-white p-5 shadow-[0_8px_25px_rgba(77,54,39,.04)] transition hover:-translate-y-1 hover:border-[#f4512a]/20 hover:shadow-[0_12px_30px_rgba(77,54,39,.1)]"><span className={`grid h-14 w-14 place-items-center rounded-2xl ${styles[index]}`}><Icon size={25} strokeWidth={1.8} /></span><span className="text-sm font-bold text-[#3f3934]">{name}</span></button>; }
